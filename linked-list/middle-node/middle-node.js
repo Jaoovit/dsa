@@ -1,6 +1,6 @@
 var TNode = /** @class */ (function () {
-    function TNode(val, next) {
-        this.val = val === undefined ? 0 : val;
+    function TNode(value, next) {
+        this.value = value === undefined ? 0 : value;
         this.next = next === undefined ? null : next;
     }
     return TNode;

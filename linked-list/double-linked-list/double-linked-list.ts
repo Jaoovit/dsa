@@ -13,11 +13,9 @@ class DoubleLinkedList<T> {
   tail: ListNode<T> | null = null;
 
   addToFront(value: T): void {
-    const listNode = new ListNode<T>(value);
-
+    const listNode: ListNode<T> = new ListNode(value);
     if (!this.head) {
-      this.head = listNode;
-      this.tail = listNode;
+      this.head = this.tail = listNode;
     } else {
       listNode.next = this.head;
       this.head.prev = listNode;
@@ -26,11 +24,9 @@ class DoubleLinkedList<T> {
   }
 
   addToEnd(value: T): void {
-    const listNode = new ListNode<T>(value);
-
+    const listNode: ListNode<T> = new ListNode(value);
     if (!this.tail) {
-      this.tail = listNode;
-      this.head = listNode;
+      this.head = this.tail = listNode;
     } else {
       listNode.prev = this.tail;
       this.tail.next = listNode;
@@ -42,38 +38,32 @@ class DoubleLinkedList<T> {
     if (!this.head) {
       return null;
     }
-
-    const removedNode = this.head.value;
-
+    const removedListNode: T = this.head.value;
     if (this.head === this.tail) {
-      this.head = null;
-      this.tail = null;
+      this.head = this.tail = null;
     } else {
       this.head = this.head.next;
       if (this.head) {
         this.head.prev = null;
       }
     }
-    return removedNode;
+    return removedListNode;
   }
 
   removeFromEnd(): T | null {
     if (!this.tail) {
       return null;
     }
-
-    const removedNode = this.tail.value;
-
-    if (this.tail === this.head) {
-      this.tail = null;
-      this.head = null;
+    const removedListNode: T = this.tail.value;
+    if (this.head === this.tail) {
+      this.head = this.tail = null;
     } else {
       this.tail = this.tail.prev;
       if (this.tail) {
         this.tail.next = null;
       }
     }
-    return removedNode;
+    return removedListNode;
   }
 }
 

@@ -22,9 +22,9 @@ class QuickSorter {
 
   private quicksortRecursive(low: number, high: number): void {
     if (low < high) {
-      const pi = this.partition(low, high);
-      this.quicksortRecursive(low, pi - 1);
-      this.quicksortRecursive(pi + 1, high);
+      const pivot = this.partition(low, high);
+      this.quicksortRecursive(low, pivot - 1);
+      this.quicksortRecursive(pivot + 1, high);
     }
   }
 
@@ -34,10 +34,32 @@ class QuickSorter {
   }
 }
 
-// Example usage
 const testArray = [10, 7, 8, 9, 1, 5];
 console.log("Unsorted array:", testArray);
 
 const sorter = new QuickSorter([...testArray]);
 const sortedArray = sorter.sort();
 console.log("Sorted array:", sortedArray);
+
+function sortArray(nums: number[]): number[] {
+  function quickSort(low: number, high: number): void {
+    if (low < high) {
+      let i = low - 1;
+      let pivot = nums[high];
+
+      for (let j = low; j < high; j++) {
+        if (nums[j] <= pivot) {
+          i++;
+          [nums[i], nums[j]] = [nums[j], nums[i]];
+        }
+      }
+      [nums[i + 1], nums[high]] = [nums[high], nums[i + 1]];
+      const pivotIndex = i + 1;
+
+      quickSort(low, pivotIndex - 1);
+      quickSort(pivotIndex + 1, high);
+    }
+  }
+  quickSort(0, nums.length - 1);
+  return nums;
+}

@@ -26,9 +26,9 @@ var QuickSorter = /** @class */ (function () {
     };
     QuickSorter.prototype.quicksortRecursive = function (low, high) {
         if (low < high) {
-            var pi = this.partition(low, high);
-            this.quicksortRecursive(low, pi - 1);
-            this.quicksortRecursive(pi + 1, high);
+            var pivot = this.partition(low, high);
+            this.quicksortRecursive(low, pivot - 1);
+            this.quicksortRecursive(pivot + 1, high);
         }
     };
     QuickSorter.prototype.sort = function () {
@@ -37,9 +37,29 @@ var QuickSorter = /** @class */ (function () {
     };
     return QuickSorter;
 }());
-// Example usage
 var testArray = [10, 7, 8, 9, 1, 5];
 console.log("Unsorted array:", testArray);
 var sorter = new QuickSorter(__spreadArray([], testArray, true));
 var sortedArray = sorter.sort();
 console.log("Sorted array:", sortedArray);
+function sortArray(nums) {
+    function quickSort(low, high) {
+        var _a, _b;
+        if (low < high) {
+            var i = low - 1;
+            var pivot = nums[high];
+            for (var j = low; j < high; j++) {
+                if (nums[j] <= pivot) {
+                    i++;
+                    _a = [nums[j], nums[i]], nums[i] = _a[0], nums[j] = _a[1];
+                }
+            }
+            _b = [nums[high], nums[i + 1]], nums[i + 1] = _b[0], nums[high] = _b[1];
+            var pivotIndex = i + 1;
+            quickSort(low, pivotIndex - 1);
+            quickSort(pivotIndex + 1, high);
+        }
+    }
+    quickSort(0, nums.length - 1);
+    return nums;
+}

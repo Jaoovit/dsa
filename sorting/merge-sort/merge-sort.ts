@@ -74,7 +74,6 @@ class LinkedList {
   }
 }
 
-// Example usage
 const values = [4, 2, 1, 3];
 console.log("Unsorted Linked List:", values);
 const head = LinkedList.buildLinkedList(values);
